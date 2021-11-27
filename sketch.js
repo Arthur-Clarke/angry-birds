@@ -40,15 +40,7 @@ function setup(){
     bird = new Bird(100,100);
     logConstraint = new Log(230,180,80,PI/2);
 
-    options = { 
-        bodyA: bird.body,
-        bodyB: logConstraint.body,
-        stiffness: 0.04,
-        length: 0
-    };
-
-    chain = Constraint.create(options);
-    World.add(world, chain);
+    chain = new Chain(bird.body,logConstraint.body);
 }
 
 function draw(){
@@ -72,7 +64,6 @@ function draw(){
 
     bird.display();
     logConstraint.display();
+    chain.display();
 
-    strokeWeight(3);
-    line(bird.body.position.x, bird.body.position.y, logConstraint.body.position.x, logConstraint.body.position.y);
 }
