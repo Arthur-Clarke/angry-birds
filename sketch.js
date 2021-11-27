@@ -3,12 +3,14 @@ const World= Matter.World;
 const Bodies = Matter.Bodies;
 
 var engine, world;
-var box1, pig1, pig2, plataforma;
+var bird, box1, box2, box3, box4, box5, pig1, pig2, plataforma;
+var log1, log2, log3, log4, log5;
 var bgImage;
 
 function preload(){
  bgImage = loadImage("sprites/bg.png");
 }
+
 function setup(){
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
