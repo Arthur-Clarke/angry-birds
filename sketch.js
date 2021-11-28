@@ -8,7 +8,7 @@ var bird, box1, box2, box3, box4, box5, pig1, pig2, plataforma;
 var log1, log2, log3, log4, log5;
 var bgImage;
 var logConstraint;
-var chain;
+var slingShot;
 
 function preload(){
  bgImage = loadImage("sprites/bg.png");
@@ -40,7 +40,7 @@ function setup(){
     bird = new Bird(100,100);
     logConstraint = new Log(230,180,80,PI/2);
 
-    chain = new Chain(bird.body,logConstraint.body);
+    slingShot = new SlingShot(bird.body,{x:230, y:130});
 }
 
 function draw(){
@@ -64,6 +64,15 @@ function draw(){
 
     bird.display();
     logConstraint.display();
-    chain.display();
+    slingShot.display();
 
+}
+
+function mouseDragged(){
+ 
+}
+
+function mouseReleased(){
+
+    
 }
