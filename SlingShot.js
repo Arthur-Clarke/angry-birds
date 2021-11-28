@@ -11,9 +11,15 @@ class SlingShot{
         World.add(world, this.chain);
     }
     display(){
-        const positionA = this.chain.bodyA.position;
-        const positionB = this.pointB;
-        strokeWeight(3);
-        line(positionA.x,positionA.y,positionB.x,positionB.y);
+        if(this.chain.bodyA){
+            const positionA = this.chain.bodyA.position;
+            const positionB = this.pointB;
+            strokeWeight(3);
+            line(positionA.x,positionA.y,positionB.x,positionB.y);
+        }
+        
+    }
+    fly(){
+        this.chain.bodyA = null;
     }
 }
