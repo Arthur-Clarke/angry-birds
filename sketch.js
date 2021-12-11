@@ -9,6 +9,7 @@ var bird, box1, box2, box3, box4, box5, pig1, pig2, plataforma;
 var log1, log2, log3, log4, log5;
 var bgImage;
 var slingShot;
+var gameState = "onsling";
 
 function preload(){
  bgImage = loadImage("sprites/bg.png");
@@ -67,15 +68,18 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body,{x:mouseX, y:mouseY});
+    if(gameState == "onsling"){
+     Matter.Body.setPosition(bird.body,{x:mouseX, y:mouseY});
+    }
 }
 
 function mouseReleased(){
     slingShot.fly();
-    
+    gameState = "launched";
 }
 function keyPressed(){
-    if(keyCode == 32){
-        slingShot.attach(bird.body);
+    if(keyCode == 32 && gameState == "launched"){
+        slingShot.attach(bird);
+        gameState = "onsling";
     }
 }
