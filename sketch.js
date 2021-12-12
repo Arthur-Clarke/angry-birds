@@ -10,9 +10,12 @@ var log1, log2, log3, log4, log5;
 var bgImage;
 var slingShot;
 var gameState = "onsling";
+var score = 0;
+var life = 3, lifeImage;
 
 function preload(){
- bgImage = loadImage("sprites/bg.png");
+ getBackgroundImage();
+ lifeImage = loadImage("sprites/coracao.png");
 }
 
 function setup() {
@@ -44,18 +47,27 @@ function setup() {
 }
 
 function draw(){
-    background(bgImage);
+    if(bgImage){
+     background(bgImage);
+    }
+    textSize(35);
+    fill("white");
+    text("score: "+ score,width-300,50);
+    text(life,width-400,50);
+    image(lifeImage,width-450,20,35,35);
     Engine.update(engine);
     box1.display();
     box2.display();
     ground.display();
     plataforma.display();
     pig1.display();
+    pig1.score();
     log1.display();
 
     box3.display();
     box4.display();
     pig2.display();
+    pig2.score();
     log3.display();
 
     box5.display();
@@ -85,7 +97,7 @@ function keyPressed(){
 }
 
 async function getTime() {
-    var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Tokyo");
+    var response = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
     var responseJSON = await response.json();
     var datetime = responseJSON.datetime;
     var hour = datetime.slice(11, 13);
@@ -94,4 +106,11 @@ async function getTime() {
 
 async function getBackgroundImage() {
     var hour = await getTime();
+    if(hour>=06 && hour<19){
+     var bg = "sprites/bg.png";
+    }
+    else{
+     var bg = "sprites/bg2.jpg";
+    }
+    bgImage = loadImage(bg);
 }
