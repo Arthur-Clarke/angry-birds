@@ -15,7 +15,7 @@ function preload(){
  bgImage = loadImage("sprites/bg.png");
 }
 
-function setup(){
+function setup() {
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
     world = engine.world;
@@ -82,4 +82,16 @@ function keyPressed(){
         slingShot.attach(bird);
         gameState = "onsling";
     }
+}
+
+async function getTime() {
+    var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Tokyo");
+    var responseJSON = await response.json();
+    var datetime = responseJSON.datetime;
+    var hour = datetime.slice(11, 13);
+    return hour;
+}
+
+async function getBackgroundImage() {
+    var hour = await getTime();
 }
