@@ -55,6 +55,15 @@ function draw(){
     text("score: "+ score,width-300,50);
     text(life,width-400,50);
     image(lifeImage,width-450,20,35,35);
+    if(life <= 0 && score != 400){
+        fill("red");
+        text("GAMEOVER", width/2 - 50, height/2);
+    }
+    if(score == 400){
+        fill("yellow");
+        text("YOU WIN", width/2 - 50, height/2);
+    }
+
     Engine.update(engine);
     box1.display();
     box2.display();
@@ -74,25 +83,28 @@ function draw(){
     log4.display();
     log5.display();
 
-    bird.display();
+    bird.display(gameState);
     slingShot.display();
 
 }
 
 function mouseDragged(){
-    if(gameState == "onsling"){
+    if(gameState == "onsling" && life > 0 && score < 400){
      Matter.Body.setPosition(bird.body,{x:mouseX, y:mouseY});
     }
 }
 
 function mouseReleased(){
-    slingShot.fly();
-    gameState = "launched";
+    if(life > 0 && score < 400){
+        slingShot.fly();
+        gameState = "launched";
+    }
 }
 function keyPressed(){
     if(keyCode == 32 && gameState == "launched"){
         slingShot.attach(bird);
         gameState = "onsling";
+        life = life - 1;
     }
 }
 

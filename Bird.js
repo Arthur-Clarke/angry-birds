@@ -5,9 +5,9 @@ class Bird extends BaseClass{
     this.trajectory=[];
     this.smokeImage = loadImage("sprites/smoke.png");
   }
-  display(){
+  display(state){
     super.display();
-    if(this.body.position.x>200 && this.body.velocity.x>10){
+    if(this.body.position.x>200 && this.body.velocity.x>10 && state == "launched"){
       var position = [this.body.position.x, this.body.position.y];
       this.trajectory.push(position);
     }
